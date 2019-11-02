@@ -1,2 +1,1 @@
-# team-vector-project
-Team 11A Vector Project Python Program
+# Geo Coord to Vector Calculator
