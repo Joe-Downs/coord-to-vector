@@ -8,7 +8,7 @@ def dms_to_decimal(degrees, minutes, seconds, is_string):
     #print("Successfully converted DMS to decimal!\n")
     
 #decimal_to_vector() converts two sets of decimal degress to a vector
-def decimal_to_vector(degrees_1
+def decimal_to_vector(degrees_1, degrees_2):
     print("Successfully converted decimal to vector!\n")
 
 #dms_to_vector() converts two sets of DMS to a vector
@@ -49,7 +49,6 @@ def take_dms_input(is_first):
     else:
         full_dms_2 += str(degrees_west) + "° " + str(minutes_west) + "' " + str(seconds_west) + '" W'
 
-
 def take_input(function):
     if function == "dms_to_decimal" or "dms_to_vector" :
         print()
@@ -67,7 +66,7 @@ def take_input(function):
             take_dms_input()
             decimal_degrees_north_2 = dms_to_decimal(degrees_north, minutes_north, seconds_north, is_string = True)
             decimal_degrees_west_2 = dms_to_decimal(degrees_west, minutes_west, seconds_west, is_string = True)
-    elif function == decimal_to_vector:
+    elif function == "decimal_to_vector":
         print()
         
             
