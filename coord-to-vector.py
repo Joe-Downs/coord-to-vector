@@ -1,3 +1,4 @@
+﻿#Testing
 #dms_to_decimal() converts degress/minutes/seconds to decimal degrees; can return str of number to 3 places
 def dms_to_decimal(degrees, minutes, seconds, is_string):
     decimal_degrees = degrees + (minutes / 60) + (seconds / 360)
