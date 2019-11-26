@@ -84,7 +84,6 @@ def take_decimal_input():
     full_decimal_stop = str(decimal_north_stop) + "°  N" + str(decimal_west_stop) + "° W"
     
 def take_input(function):
-    print("Input taken")
     if function == "dms_to_decimal" or "dms_to_vector" :
         print()
         if function == "dms_to_decimal":
@@ -101,8 +100,7 @@ def take_input(function):
             take_dms_input()
             decimal_degrees_north_2 = dms_to_decimal(degrees_north, minutes_north, seconds_north, is_string = True)
             decimal_degrees_west_2 = dms_to_decimal(degrees_west, minutes_west, seconds_west, is_string = True)
-    if function == "vector":
-        print("Vector!")
+    if function == "decimal_to_vector":
         print()
         take_decimal_input()
         decimal_to_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
@@ -127,8 +125,7 @@ while user_choice not in sentinel_values:
     if user_choice == "1":
         take_input("dms_to_decimal")
     elif user_choice == "2":
-        print("Two!")
-        take_input("vector")
+        take_input("decimal_to_vector")
     elif user_choice == "3":
         take_input("dms_to_vector")
     elif user_choice not in sentinel_values:
