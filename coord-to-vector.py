@@ -104,7 +104,7 @@ def take_input(function):
         print()
         take_decimal_input()
         decimal_to_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
-        print("Starting at " + full_decimal_start + "  and ending at " + full_decimal_start +
+        print("Starting at " + full_decimal_start + "  and ending at " + full_decimal_stop +
               " yields the vector of: " + vector_notation)
 
 #Menu allows user 3 options:
