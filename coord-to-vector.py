@@ -22,6 +22,8 @@ def decimal_to_vector(north_start, west_start, north_stop, west_stop):
 def dms_to_vector():
     print("Successfully converted DMS to vector!\n")
 
+def haversine_vector():
+
 degrees_north = None
 minutes_north = None
 seconds_north = None
@@ -100,24 +102,21 @@ def take_input(function):
             take_dms_input()
             decimal_degrees_north_2 = dms_to_decimal(degrees_north, minutes_north, seconds_north, is_string = True)
             decimal_degrees_west_2 = dms_to_decimal(degrees_west, minutes_west, seconds_west, is_string = True)
-    if function == "decimal_to_vector":
+    if function == "decimal_to_vector" or "haversine_vector":
         print()
         take_decimal_input()
         decimal_to_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
+        if function == "haversine_vector":
+            haversine_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
         print("Starting at " + full_decimal_start + "  and ending at " + full_decimal_stop +
               " yields the vector of: " + vector_notation)
-
-#Menu allows user 3 options:
-#1 Deg/min/sec to decimal deg
-#2 Convert decimal deg to vector
-#3 Convert deg/min/sec to vector
-#4 Quit
 
 user_choice = ()
 sentinel_values = ("q", "exit", "quit", "stop")
 print("#1 Deg/Min/Sec to Decimal Degrees")
 print("#2 Decimal Degrees to Vector Coordinates")
 print("#3 Deg/Min/Sec to Vector Coordinates")
+print("#4 Decimal Degrees to Vector Coordinates using the Haversine Formula")
 print()
 
 while user_choice not in sentinel_values:
@@ -128,5 +127,7 @@ while user_choice not in sentinel_values:
         take_input("decimal_to_vector")
     elif user_choice == "3":
         take_input("dms_to_vector")
+    elif user_choice == "4":
+        take_input("haversine_vector")
     elif user_choice not in sentinel_values:
        print("Invalid option. Please choose again.")
