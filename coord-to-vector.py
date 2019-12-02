@@ -1,4 +1,5 @@
-﻿#dms_to_decimal() converts degress/minutes/seconds to decimal degrees; can return str of number to 3 places
+﻿import math
+#dms_to_decimal() converts degress/minutes/seconds to decimal degrees; can return str of number to 3 places
 def dms_to_decimal(degrees, minutes, seconds, is_string):
     decimal_degrees = degrees + (minutes / 60) + (seconds / 360)
     if is_string:
@@ -6,7 +7,6 @@ def dms_to_decimal(degrees, minutes, seconds, is_string):
     else:
         return decimal_degrees
 
-vector_notation = None
 #decimal_to_vector() converts two sets of decimal degress to a vector
 def decimal_to_vector(north_start, west_start, north_stop, west_stop):
     global vector_notation
@@ -16,13 +16,23 @@ def decimal_to_vector(north_start, west_start, north_stop, west_stop):
     x_stop = west_stop * (40000/360) * 3280.4
     y_vector = y_stop - y_start
     x_vector = x_stop - x_start
-    vector_notation = str(round(x_vector)) + "î + " + str(round(y_vector)) + "ĵ"
+    return str(round(x_vector)) + "î + " + str(round(y_vector)) + "ĵ"
     
 #dms_to_vector() converts two sets of DMS to a vector
 def dms_to_vector():
     print("Successfully converted DMS to vector!\n")
 
-def haversine_vector():
+def haversine_vector(long_start, lat_start, long_stop, lat_stop):
+    long_dist = long_stop - long_start
+    lat_dist = lat_stop - lat_start
+    rad_lat_start = math.radians(lat_start)
+    rad_lat_stop = math.radians(lat_stop)
+    rad_long_dist = math.radians(long_dist)
+    rad_lat_dist = math.radians(lat_dist)
+    a = ((math.sin(rad_lat_dist / 2)) ** 2) + (math.cos(rad_lat_stop)) * (math.cos(rad_lat_start)) * (
+        math.sin((rad_long_dist / 2)) ** 2)
+    r = 3956 #radius of Earth in miles
+
 
 degrees_north = None
 minutes_north = None
@@ -77,16 +87,16 @@ def take_decimal_input():
     global decimal_north_stop
     global decimal_west_stop
     global full_decimal_start
-    global full_decimal_end
+    global full_decimal_stop
     decimal_north_start = float(input("Enter the starting North coordinate: "))
     decimal_west_start = float(input("Enter the starting West coordinate: "))
     full_decimal_start = str(decimal_north_start) + "° N " + str(decimal_west_start) + "° W"
     decimal_north_stop = float(input("Enter the ending North coordinate: "))
     decimal_west_stop = float(input("Enter the ending West coordinate: "))
-    full_decimal_stop = str(decimal_north_stop) + "°  N" + str(decimal_west_stop) + "° W"
+    full_decimal_stop = str(decimal_north_stop) + "° N " + str(decimal_west_stop) + "° W"
     
 def take_input(function):
-    if function == "dms_to_decimal" or "dms_to_vector" :
+    if function == "dms_to_decimal":
         print()
         if function == "dms_to_decimal":
             take_dms_input(is_first = True)
@@ -99,16 +109,16 @@ def take_input(function):
             decimal_degrees_north_1 = dms_to_decimal(degrees_north, minutes_north, seconds_north, is_string = True)
             decimal_degrees_west_1 = dms_to_decimal(degrees_west, minutes_west, seconds_west, is_string = True)
             print("Input the second set of coordinates.")
-            take_dms_input()
+            take_dms_input(is_first = False)
             decimal_degrees_north_2 = dms_to_decimal(degrees_north, minutes_north, seconds_north, is_string = True)
             decimal_degrees_west_2 = dms_to_decimal(degrees_west, minutes_west, seconds_west, is_string = True)
-    if function == "decimal_to_vector" or "haversine_vector":
+    else:
         print()
         take_decimal_input()
-        decimal_to_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
+        vector_notation = decimal_to_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
         if function == "haversine_vector":
             haversine_vector(decimal_north_start, decimal_west_start, decimal_north_stop, decimal_west_stop)
-        print("Starting at " + full_decimal_start + "  and ending at " + full_decimal_stop +
+        print("Starting at " + full_decimal_start + " and ending at " + full_decimal_stop +
               " yields the vector of: " + vector_notation)
 
 user_choice = ()
